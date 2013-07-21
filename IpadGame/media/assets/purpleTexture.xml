@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:a3a66a8d99457114d99c9910192bb2e9$ -->
+<TextureAtlas imagePath="purpleTexture.png">
+    <SubTexture name="purple0002" x="2" y="2" width="550" height="175"/>
+    <SubTexture name="purple0003" x="554" y="2" width="550" height="175"/>
+    <SubTexture name="purple0004" x="1106" y="2" width="550" height="175"/>
+    <SubTexture name="purple0005" x="2" y="179" width="550" height="175"/>
+    <SubTexture name="purple0006" x="554" y="179" width="550" height="175"/>
+    <SubTexture name="purple0007" x="1106" y="179" width="550" height="175"/>
+    <SubTexture name="purple0008" x="2" y="356" width="550" height="175"/>
+    <SubTexture name="purple0009" x="554" y="356" width="550" height="175"/>
+    <SubTexture name="purple0010" x="1106" y="356" width="550" height="175"/>
+    <SubTexture name="purple0011" x="2" y="533" width="550" height="175"/>
+    <SubTexture name="purple0012" x="554" y="533" width="550" height="175"/>
+    <SubTexture name="purple0013" x="1106" y="533" width="550" height="175"/>
+    <SubTexture name="purple0014" x="2" y="710" width="550" height="175"/>
+    <SubTexture name="purple0015" x="554" y="710" width="550" height="175"/>
+    <SubTexture name="purple0016" x="1106" y="710" width="550" height="175"/>
+    <SubTexture name="purple0017" x="2" y="887" width="550" height="175"/>
+    <SubTexture name="purple0018" x="554" y="887" width="550" height="175"/>
+    <SubTexture name="purple0019" x="1106" y="887" width="550" height="175"/>
+    <SubTexture name="purple0020" x="2" y="1064" width="550" height="175"/>
+    <SubTexture name="purple0021" x="554" y="1064" width="550" height="175"/>
+    <SubTexture name="purple0022" x="1106" y="1064" width="550" height="175"/>
+    <SubTexture name="purple0023" x="2" y="1241" width="550" height="175"/>
+    <SubTexture name="purple0024" x="554" y="1241" width="550" height="175"/>
+    <SubTexture name="purple0025" x="1106" y="1241" width="550" height="175"/>
+    <SubTexture name="purple0026" x="2" y="1418" width="550" height="175"/>
+    <SubTexture name="purple0027" x="554" y="1418" width="550" height="175"/>
+    <SubTexture name="purple0028" x="1106" y="1418" width="550" height="175"/>
+    <SubTexture name="purple0029" x="2" y="1595" width="550" height="175"/>
+    <SubTexture name="purple0030" x="554" y="1595" width="550" height="175"/>
+    <SubTexture name="purple0031" x="1106" y="1595" width="550" height="175"/>
+    <SubTexture name="purple0032" x="2" y="1772" width="550" height="175"/>
+    <SubTexture name="purple0033" x="554" y="1772" width="550" height="175"/>
+    <SubTexture name="purple0034" x="1106" y="1772" width="550" height="175"/>
+</TextureAtlas>

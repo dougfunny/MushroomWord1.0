@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:da5ff2a03828d0cd3ef58fe91009803e$ -->
+<TextureAtlas imagePath="menuFlyTexture.png">
+    <SubTexture name="flyMenu_0001" x="0" y="0" width="560" height="250"/>
+    <SubTexture name="flyMenu_0002" x="560" y="0" width="560" height="250"/>
+    <SubTexture name="flyMenu_0003" x="1120" y="0" width="560" height="250"/>
+    <SubTexture name="flyMenu_0004" x="0" y="250" width="560" height="250"/>
+    <SubTexture name="flyMenu_0005" x="560" y="250" width="560" height="250"/>
+    <SubTexture name="flyMenu_0006" x="1120" y="250" width="560" height="250"/>
+    <SubTexture name="flyMenu_0007" x="0" y="500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0008" x="560" y="500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0009" x="1120" y="500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0010" x="0" y="750" width="560" height="250"/>
+    <SubTexture name="flyMenu_0011" x="560" y="750" width="560" height="250"/>
+    <SubTexture name="flyMenu_0012" x="1120" y="750" width="560" height="250"/>
+    <SubTexture name="flyMenu_0013" x="0" y="1000" width="560" height="250"/>
+    <SubTexture name="flyMenu_0014" x="560" y="1000" width="560" height="250"/>
+    <SubTexture name="flyMenu_0015" x="1120" y="1000" width="560" height="250"/>
+    <SubTexture name="flyMenu_0016" x="0" y="1250" width="560" height="250"/>
+    <SubTexture name="flyMenu_0017" x="560" y="1250" width="560" height="250"/>
+    <SubTexture name="flyMenu_0018" x="1120" y="1250" width="560" height="250"/>
+    <SubTexture name="flyMenu_0019" x="0" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0020" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0021" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0022" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0023" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0024" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0025" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0026" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0027" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0028" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0029" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0030" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0031" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0032" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0033" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="flyMenu_0034" x="560" y="1500" width="560" height="250"/>
+    <SubTexture name="menuBack" x="1120" y="1500" width="648" height="375"/>
+</TextureAtlas>
