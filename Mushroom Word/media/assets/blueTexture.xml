@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:78ed869254edc04408592f3dfd2adf58$ -->
+<TextureAtlas imagePath="blueTexture.png">
+    <SubTexture name="blue0001" x="2" y="2" width="83" height="178"/>
+    <SubTexture name="blue0002" x="87" y="2" width="83" height="178"/>
+    <SubTexture name="blue0003" x="172" y="2" width="83" height="178"/>
+    <SubTexture name="blue0004" x="257" y="2" width="83" height="178"/>
+    <SubTexture name="blue0005" x="342" y="2" width="83" height="178"/>
+    <SubTexture name="blue0006" x="427" y="2" width="83" height="178"/>
+    <SubTexture name="blue0007" x="2" y="182" width="83" height="178"/>
+    <SubTexture name="blue0008" x="87" y="182" width="83" height="178"/>
+    <SubTexture name="blue0009" x="172" y="182" width="83" height="178"/>
+    <SubTexture name="blue0010" x="257" y="182" width="83" height="178"/>
+    <SubTexture name="blue0011" x="342" y="182" width="83" height="178"/>
+    <SubTexture name="blue0012" x="257" y="182" width="83" height="178"/>
+    <SubTexture name="blue0013" x="172" y="182" width="83" height="178"/>
+    <SubTexture name="blue0014" x="87" y="182" width="83" height="178"/>
+    <SubTexture name="blue0015" x="2" y="182" width="83" height="178"/>
+    <SubTexture name="blue0016" x="427" y="2" width="83" height="178"/>
+    <SubTexture name="blue0017" x="342" y="2" width="83" height="178"/>
+    <SubTexture name="blue0018" x="427" y="182" width="83" height="178"/>
+    <SubTexture name="blue0019" x="2" y="362" width="83" height="178"/>
+    <SubTexture name="blue0020" x="87" y="362" width="83" height="178"/>
+    <SubTexture name="blue0021" x="172" y="362" width="83" height="178"/>
+    <SubTexture name="blue0022" x="257" y="362" width="83" height="178"/>
+    <SubTexture name="blue0023" x="342" y="362" width="83" height="178"/>
+    <SubTexture name="blue0024" x="427" y="362" width="83" height="178"/>
+    <SubTexture name="blue0025" x="2" y="542" width="83" height="178"/>
+    <SubTexture name="blue0026" x="87" y="542" width="83" height="178"/>
+    <SubTexture name="blue0027" x="2" y="542" width="83" height="178"/>
+    <SubTexture name="blue0028" x="427" y="362" width="83" height="178"/>
+    <SubTexture name="blue0029" x="342" y="362" width="83" height="178"/>
+    <SubTexture name="blue0030" x="172" y="542" width="83" height="178"/>
+    <SubTexture name="blue0031" x="257" y="542" width="83" height="178"/>
+    <SubTexture name="blue0032" x="342" y="542" width="83" height="178"/>
+    <SubTexture name="blue0033" x="427" y="542" width="83" height="178"/>
+    <SubTexture name="blue0034" x="2" y="722" width="83" height="178"/>
+    <SubTexture name="blue0035" x="87" y="722" width="83" height="178"/>
+    <SubTexture name="blue0036" x="172" y="722" width="83" height="178"/>
+    <SubTexture name="blue0037" x="87" y="722" width="83" height="178"/>
+    <SubTexture name="blue0038" x="2" y="722" width="83" height="178"/>
+    <SubTexture name="blue0039" x="427" y="542" width="83" height="178"/>
+    <SubTexture name="blue0040" x="2" y="722" width="83" height="178"/>
+    <SubTexture name="blue0041" x="87" y="722" width="83" height="178"/>
+    <SubTexture name="blue0042" x="172" y="722" width="83" height="178"/>
+    <SubTexture name="blue0043" x="87" y="722" width="83" height="178"/>
+    <SubTexture name="blue0044" x="2" y="722" width="83" height="178"/>
+    <SubTexture name="blue0045" x="2" y="722" width="83" height="178"/>
+    <SubTexture name="blue0046" x="427" y="542" width="83" height="178"/>
+    <SubTexture name="blue0047" x="2" y="722" width="83" height="178"/>
+    <SubTexture name="blue0048" x="87" y="722" width="83" height="178"/>
+    <SubTexture name="blue0049" x="172" y="722" width="83" height="178"/>
+    <SubTexture name="blue0050" x="87" y="722" width="83" height="178"/>
+    <SubTexture name="blue0051" x="2" y="722" width="83" height="178"/>
+    <SubTexture name="blue0052" x="2" y="722" width="83" height="178"/>
+</TextureAtlas>
