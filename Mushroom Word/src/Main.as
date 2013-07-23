@@ -27,8 +27,8 @@ package
 	 */	
 	
 	
-	//[SWF(frameRate="60", width="960", height="640",SplashLoadingColor="0x000000")]
-	[SWF(frameRate="60", width="1024", height="768",SplashLoadingColor="0x000000")]
+   [SWF(frameRate="60", width="960", height="640",BackgroundColor="0x545454")]
+	//[SWF(frameRate="60", width="1024", height="768",BackgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
 		
@@ -38,15 +38,13 @@ package
 		private var PointTimer:Timer;
 		private var PointTime:int;
 		private var sprite:MovieClip = new MovieClip();
-		private var SplashLoading:Bitmap =  new Assests.SplashLoading();
+		private var Background:Bitmap =  new Assests.Background();
 		private var splash:MovieClip = new MovieClip();
 		
-		private var bgSplash:Bitmap =  new Assests.SplashLoading();
+		private var bgSplash:Bitmap =  new Assests.Background();
 		
 		public function Main( )
-			
-			
-			
+			 
 		{  
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -80,8 +78,9 @@ package
 			addChild(startupImage);
 			
 			
+			
 			myStarling = new Starling(Game, stage, null, null, "auto", "baseline");
-			myStarling.antiAliasing = 3;
+			myStarling.antiAliasing = 0;
 			
 			
 			myStarling.stage3D.addEventListener(Event.CONTEXT3D_CREATE, function(e:Event):void 
@@ -107,12 +106,12 @@ package
 		{
 			var sprite:MovieClip = new MovieClip();
 			
-			var SplashLoading:Bitmap = isHD ?
-				new Assests.SplashLoading() : new Assests.SplashLoading();
+			var Background:Bitmap = isHD ?
+				new Assests.Background() : new Assests.Background();
 			
 			
-			SplashLoading.smoothing = true;
-			sprite.addChild(SplashLoading);
+			Background.smoothing = true;
+			sprite.addChild(Background);
 			sprite.x =300;
 			sprite.y = 300;
 			

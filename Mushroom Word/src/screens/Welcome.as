@@ -16,7 +16,7 @@ package screens
 		
 		private var bg:Image;
 		private var welcomeImage:Image;
- 
+		private var  screenInGame:InGame;
 		private var splash:Image;
 		private var startSplash:Image;
 		private var startButton:Button;
@@ -25,6 +25,8 @@ package screens
 		
 		public function Welcome()
 		{
+		
+			
 			super();
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			//
@@ -32,7 +34,9 @@ package screens
 		
 		private function onAddedToStage(event:Event):void
 		{	
+			
 			drawScreen();
+			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			
 		}
 		
@@ -54,7 +58,7 @@ package screens
 			startButton.x = 257;
 			startButton.y = 360;
 			
-			
+		
 			
 			this.addEventListener(Event.TRIGGERED , onMenuClick);
 			
@@ -68,11 +72,16 @@ package screens
 		
 		private function onMenuClick(event:Event):void
 		{
+			 
+		
+		
+	
 			if (!Sounds.muted) Sounds. sndLevelSelect.play();
 			var  buttonClicked:Button  = event.target as Button;
 			if((buttonClicked as Button) ==  startButton)
 			{   
 				this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id:"logo"} ,true))
+		
 			}
 		}
 		

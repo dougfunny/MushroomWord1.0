@@ -26,20 +26,18 @@ package objects
 		{  
 			trace("Starling Framework Intialized!");
 			this.addEventListener(events.NavigationEvent.CHANGE_SCREEN, onChangeScreen);
-		 
 			
-	        screenInGame = new InGame();
+			
+			screenInGame = new InGame();
 			this.addChild(screenInGame);
 			
-			
-		 
 			screenWelcome  = new Welcome();
 			this.addChild(screenWelcome);
 			screenWelcome.intialize();
 			
 		}
 		
-	  
+		
 		
 		private function onChangeScreen(event:NavigationEvent):void
 		{
@@ -47,13 +45,13 @@ package objects
 			switch (event.params.id)
 			{ 
 				case "logo":			
-			 
+					
 					screenWelcome.DisposeTemp();
-				    screenInGame.initialize();
-				break;
+					screenInGame.initialize();
+					break;
 				
 			}
-			}
 		}
-		
 	}
+	
+}
