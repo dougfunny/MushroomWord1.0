@@ -22,12 +22,15 @@ package
 	import flash.display.MovieClip;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.display.DisplayObject;
+	import starling.display.Image;
+
 	/**
 	 * SWF meta data defined for iPad 1 & 2 in landscape mode. 
 	 */	
 	
 	
-   [SWF(frameRate="60", width="960", height="640",BackgroundColor="0x545454")]
+   [SWF(frameRate="60", width="960", height="640",BackgroundColor="0x000000")]
 	//[SWF(frameRate="60", width="1024", height="768",BackgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
@@ -39,9 +42,10 @@ package
 		private var PointTime:int;
 		private var sprite:MovieClip = new MovieClip();
 		private var Background:Bitmap =  new Assests.Background();
-		private var splash:MovieClip = new MovieClip();
+	 
 		
 		private var bgSplash:Bitmap =  new Assests.Background();
+ 
 		
 		public function Main( )
 			 
@@ -80,7 +84,7 @@ package
 			
 			
 			myStarling = new Starling(Game, stage, null, null, "auto", "baseline");
-			myStarling.antiAliasing = 0;
+			myStarling.antiAliasing = 10;
 			
 			
 			myStarling.stage3D.addEventListener(Event.CONTEXT3D_CREATE, function(e:Event):void 
@@ -100,14 +104,14 @@ package
 				function (e:Event):void { myStarling.stop(); });
 		}
 		
-		
+	 
 		
 		private function createStartupImage(viewPort:Rectangle, isHD:Boolean):MovieClip
 		{
 			var sprite:MovieClip = new MovieClip();
 			
 			var Background:Bitmap = isHD ?
-				new Assests.Background() : new Assests.Background();
+				new Assests.BackgroundLogo() : new Assests.BackgroundLogo();
 			
 			
 			Background.smoothing = true;

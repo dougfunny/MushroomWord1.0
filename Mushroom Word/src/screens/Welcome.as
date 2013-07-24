@@ -2,14 +2,18 @@ package screens
 {
 	//import com.greensock.TweenLite;
 	
-	import events.NavigationEvent;
 	import flash.media.SoundMixer;
+	
+	import events.NavigationEvent;
+	
 	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
+	import starling.display.MovieClip;
 	import starling.display.Sprite;
 	import starling.events.Event;
-  
+ 
+    import objects.Mushroom;
 	
 	public class Welcome extends Sprite
 	{
@@ -21,6 +25,9 @@ package screens
 		private var startSplash:Image;
 		private var startButton:Button;
 		private var blueButton:Image;
+		private var blueMushroom:MovieClip;
+		public var loadMushrooms:Mushroom;
+		private var loadingImage:Image;
 		
 		
 		public function Welcome()
@@ -58,31 +65,44 @@ package screens
 			startButton.x = 257;
 			startButton.y = 360;
 			
-		
 			
 			this.addEventListener(Event.TRIGGERED , onMenuClick);
 			
 		}
 		
-		public function DisposeTemp():void
-		{
-			this.visible = false;
-			
-		}
+	 
 		
 		private function onMenuClick(event:Event):void
 		{
 			 
+			
+			
+			loadingImage = new Image(Assests.getAtlas().getTexture("loading"));
+			loadingImage.visible = true;
+			loadingImage.x = 300;
+			loadingImage.y = 300;
+			loadingImage.addEventListener(Event.ENTER_FRAME,MushroomLoader);
+			
+			this.addChild(loadingImage);
+			
+			
+		}
 		
-		
-	
+		private function MushroomLoader(event:Event):void
+		{
 			if (!Sounds.muted) Sounds. sndLevelSelect.play();
 			var  buttonClicked:Button  = event.target as Button;
-			if((buttonClicked as Button) ==  startButton)
-			{   
-				this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id:"logo"} ,true))
-		
-			}
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id:"logo"} ,true))
+			loadingImage.removeEventListener(Event.ENTER_FRAME,MushroomLoader);
+			 
+			
+			   loadMushrooms = new Mushroom();
+				this.addChild(loadMushrooms);
+				
+			
+				
+			 
+			
 		}
 		
 		public function intialize():void
@@ -93,6 +113,11 @@ package screens
 		}
 		
 		
+		public function DisposeTemp():void
+		{
+			this.visible = false;
+			
+		}
 	}
 	
 	

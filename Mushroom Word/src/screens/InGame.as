@@ -1,30 +1,19 @@
 package screens
 { 
  
- 
 	import flash.events.TimerEvent;
 	import flash.media.SoundMixer;
 	import flash.utils.Timer;
-	import objects.GameFont;
-	
-	import starling.display.Sprite;
-	import starling.events.Event;
-	import starling.text.TextField;
-	
 	import events.NavigationEvent;
-	
 	import objects.GameFont;
 	import objects.GameWord;
-	 
 	import objects.Letters;
-	
+	import objects.Mushroom;
 	import screens.Welcome;
-	
 	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.MovieClip;
-	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.extensions.PDParticleSystem;
@@ -36,18 +25,13 @@ package screens
 	{   private var unHide:Array = new Array();
 		private var age:int = 0;
 	    private var screenWelcome:Welcome;
- 
 		private var  WinterLevel:Number;
-	 
 		private var x:int = 0;
- 
 		private var loadScreen:MovieClip;
- 
 		private static var levelOne:Button;
 		private var levelTwo:Button;
 		private var levelThree:Button;
 		private var levelFour:Button;
-	 
 		private var Submit:Button;
 		private var BackSpace:Button;
 		private var words:Button;
@@ -61,7 +45,6 @@ package screens
 		private var words9:Button;
 		private var words10:Button;
 		private var words11:Button;
-		 
 		private var fallSpeed:Number;
 		private var LevelBG:Image;
 		private var LevelBGThree:Image;
@@ -87,8 +70,6 @@ package screens
 		private var gameState:int;
 		private var playerSpeed:Number;
 		private var speed:Number;
-	 
- 
 		private var levelBoolOne:Boolean =false;
 		private var levelBoolTwo:Boolean =false;
 		private var levelBoolThree:Boolean =false;
@@ -109,7 +90,6 @@ package screens
 		private var MoreLetters:Array = new Array;
 		private var LetterRate:int;
 		private var tree:node;
-		
 		private var slangContent:String
 		private var slangSplit:String;
 		private var bgImg:Image;
@@ -133,10 +113,9 @@ package screens
 		private var currentX:int;
 		private var gamePaused:Boolean;
 		private var pauseButton:Button;
-		
 		private var GameTime:Number;
 		private var PointTime:Number;
-		private var RoundTime:Number = 25;
+		private var RoundTime:Number = 4;
 		private var minuteTimer:Timer;
 		private var PointTimer:Timer;
 		private var words_Delete:Button;
@@ -144,13 +123,10 @@ package screens
 		private var hide:Number;
 		private var soundButton:SoundButton;
 		private var gameOverContainer:GameOverContainer;
- 
 		private var board:Image;
 		private var gameEnd:Boolean;
-	 
 		private var achievments:Image;
 		private var particleSplash:PDParticleSystem;
- 
 		private var menuFly:MovieClip;
 		private var showMenuBool:Boolean= false;
 		private var backMenu:Image;
@@ -158,32 +134,22 @@ package screens
 		private var continueButton:Button;
 		private var SplashTime:int;
 		private var SplashTimer:Timer;
-		private var blueMushroom:MovieClip;
-		private var redMushroom:MovieClip;
-		private var greenMushroom:MovieClip;
-		private var purpleMushroom:MovieClip;
 		private var levelRoomSelect:Image;
-	 
-		 
 		private var _answerString:String;
 		private var _ScoreString:String;
 		private var _TimeString:String;
 		private var _TimeStringAmount:String;
 		private var _PointString:String;
-		
 		private var answerStringLabel:TextField;
 		private var answerStringText:TextField;		
 		private var ScoreStringText:TextField;
 		private var TimeStringText:TextField;
 		private var PointStringText:TextField;
-		
 		private var AnswerValue:objects.GameFont;		
 		private var Score:objects.GameFont;
 		private var Time:objects.GameFont;
 		private var TimeAmount:objects.GameFont;
 		private var Point:objects.GameFont;
-		
-		
 		private var ScoreText:TextField;
 		private var TimeText:TextField;
 		private var TimeTextAmount:TextField;
@@ -192,6 +158,12 @@ package screens
 		private var loadingImage:Image;
 		private var loading:Boolean;
 		private var stopLoading:Boolean;
+		private var timesUp:Image;
+		private var pool:SpritePool;
+		private var mushrooms:Array;
+		private var container:Mushroom;
+		private var EOLTimer:Timer;
+		private var EOLTime:int;
 		public function InGame()
 			
 		{	
@@ -231,12 +203,7 @@ package screens
 			
 			
 		}
-		
-		
-		
-		
-		
-		
+		 
 		
 		private function onAddedToStage(event:Event):void
 		{
@@ -269,6 +236,9 @@ package screens
 			speed = 50;//how fast the letters fall
 		 	
 			 
+		 
+			SpritePool.init(1);
+			 
 			
 			
 			levelRoomSelect = new  Image(Assests.getAtlas().getTexture("levelSelectWallpaper"));
@@ -299,13 +269,11 @@ package screens
 			levelFour.y = 350;
 		 
 			this.addChild(levelFour);
-  
-			
-		
+   
 			
 			// Time label
 			continueButton = new  Button(Assests.getAtlas().getTexture("continueButton"));
-			continueButton.x =300;
+			continueButton.x =240;
 			continueButton.y =400;
 			continueButton.visible = false;
 		 
@@ -322,13 +290,7 @@ package screens
 		}
 		
 		private function onContinueButtonClick():void
-		{	/*board.visible = false;
-			menuFly.visible = false;
-			blueMushroom,visible = false;
-			redMushroom.visible = false;
-			continueButton.visible = false;
-			this.removeChild(bgQuad);
-			SoundMixer.stopAll()*/
+		{	 
 			gameOver();
 			if (!Sounds.muted) Sounds. sndLevelSelect.play(); 
 			loadingImage.addEventListener(Event.ENTER_FRAME,levelLoader);
@@ -367,10 +329,7 @@ package screens
 		{
 			// trace(unHide.length-1);
 			
-			
- 
-			
-			
+			 
 			if(unHide[unHide.length-1]==11){
 				trace(unHide[unHide.length-1]);
 				trace("words11");
@@ -575,7 +534,7 @@ package screens
 			
 			//	HundredPoints.visible = true;
 			// creates a new five-second Timer 
-			PointTimer = new Timer(1000, 11);
+			PointTimer = new Timer(1000, 3);
 			// designates listeners for the interval and completion events 
 			PointTimer.addEventListener(TimerEvent.TIMER, onTickPoint); 
 			//minuteTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete); 
@@ -587,12 +546,11 @@ package screens
 		
 		private function onTickPoint(event:TimerEvent):void  
 		{  
-			PointTime = -3+ event.target.currentCount;
+			PointTime = -2+ event.target.currentCount;
 			trace(PointTime);	
 			if(showMenuBool){
-			if(PointTime ==-2){trace("YES");menuFly.pause();}revealMenu();}
-			//if(PointTime == -1)
-				//blueMushroom.pause();
+			if(PointTime ==1){trace("YES");menuFly.pause();}revealMenu();}
+			 
 		}
 		
 		
@@ -605,7 +563,7 @@ package screens
 			
 			//	HundredPoints.visible = true;
 			// creates a new five-second Timer 
-			SplashTimer = new Timer(1000, 3);
+			SplashTimer = new Timer(1000, 6);
 			// designates listeners for the interval and completion events 
 			SplashTimer.addEventListener(TimerEvent.TIMER, onTickPointSplash); 
 			//minuteTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete); 
@@ -785,9 +743,7 @@ package screens
 			
 			/////////////////////////////////////////////////////////////////////////////////////////////
 			
-		 
-			
-			
+		  
 			
 			if(levelBoolOne){
 				words.x+=370;;//700
@@ -844,7 +800,6 @@ package screens
 				
 				word6Bool = false;
 				this.addChild(words6);
-				
 				words2.y = -words2.height;
 				words3.y = -words3.height;
 				words4.y = -words4.height;
@@ -859,22 +814,16 @@ package screens
 				words3.x+=70;//700
 				words4= new Button(Assests.getAtlas().getTexture("Letter_"  + (WinterLevel + wordNum[3] )));
 				words4.x =  220;//300
-				
 				word4Bool = false;
 				this.addChild(words4);
-				
 				words5= new Button(Assests.getAtlas().getTexture("Letter_" + (WinterLevel +wordNum[4] )));
 				words5.x =  330;///400
-				
 				word5Bool = false;
 				this.addChild(words5);
-				
 				words6= new Button(Assests.getAtlas().getTexture("Letter_"  + (WinterLevel + wordNum[5]) ));
 				words6.x = 430;//500
-				
 				word6Bool = false;
 				this.addChild(words6);
-				
 				words2.y = -words2.height;
 				words3.y = -words3.height;
 				words4.y = -words4.height;
@@ -887,19 +836,14 @@ package screens
 				words3.x+=70;//700
 				words4= new Button(Assests.getAtlas().getTexture("Letter_"  + (WinterLevel + wordNum[3]) ));
 				words4.x =  220;//300
-				
 				word4Bool = false;
 				this.addChild(words4);
-				
 				words5= new Button(Assests.getAtlas().getTexture("Letter_"  + (WinterLevel + wordNum[4] )));
 				words5.x =  330;///400
-				
 				word5Bool = false;
 				this.addChild(words5);
-				
 				words6= new Button(Assests.getAtlas().getTexture("Letter_"  + (WinterLevel +wordNum[5] )));
-				words6.x = 430;//500
-				
+				words6.x = 430;//50
 				word6Bool = false;
 				this.addChild(words6);
 				words2.y = -words2.height;
@@ -913,18 +857,13 @@ package screens
 			words2.addEventListener(Event.TRIGGERED, onWord2Click);	
 			words3.addEventListener(Event.TRIGGERED, onWord3Click);
 			BackSpace.addEventListener(Event.TRIGGERED, onBackSpaceButtonClick);
-			
 			words4.addEventListener(Event.TRIGGERED, onWord4Click);
 			words5.addEventListener(Event.TRIGGERED, onWord5Click);
 			words6.addEventListener(Event.TRIGGERED, onWord6Click);
-			
-			
 			words7.addEventListener(Event.TRIGGERED, onWord7Click);
 			words8.addEventListener(Event.TRIGGERED, onWord8Click);
 			words9.addEventListener(Event.TRIGGERED, onWord9Click);
-			
-			
-			words10.addEventListener(Event.TRIGGERED, onWord10Click);
+		    words10.addEventListener(Event.TRIGGERED, onWord10Click);
 			words11.addEventListener(Event.TRIGGERED, onWord11Click);
 		 
 		}		
@@ -963,7 +902,7 @@ package screens
 			this.addChild(loadingImage);
 			else{ this.addChild(loadingImage);loadingImage.visible = false;}
 			loading =true;
-			levelBoolThree=true;
+			levelBoolThree=true;levelBoolFour=false;
 		}
 		
 		private function onlevelTwoClick():void
@@ -973,7 +912,7 @@ package screens
 			this.addChild(loadingImage);
 			else {this.addChild(loadingImage);loadingImage.visible = false;}
 			loading =true;
-			levelBoolTwo=true;
+			levelBoolTwo=true;levelBoolFour=false;
 		}
 		
 		private function onlevelOneClick():void
@@ -983,7 +922,7 @@ package screens
 			this.addChild(loadingImage);}
 			else {this.addChild(loadingImage);loadingImage.visible = false;}
 			loading =true;
-			levelBoolOne=true;
+			levelBoolOne=true;levelBoolFour=false;
 		}
 		
 		
@@ -991,14 +930,9 @@ package screens
 		{
 			this.removeChild(loadingImage);
 		
-			
+			menuFly = new MovieClip(Assests.getAtlasMenu().getTextures("flyMenu_"), 20);
 			// Pause button.
-			pauseButton = new Button(Assests.getAtlas().getTexture("pauseMenu"));
-			pauseButton.x = 500;
-			pauseButton.y = 680;
-			pauseButton.visible = false;
-			pauseButton.addEventListener(Event.TRIGGERED, onPauseButtonClick);
-			this.addChild(pauseButton);
+		
 			board = new Image(Assests.getAtlas().getTexture("scoreBox"));
 			board.y = 400;
 			board.x =-20;
@@ -1010,7 +944,8 @@ package screens
 			paused.x  = 350 ;
 			paused.y =  310 ;
 			paused.visible = false;
-			this.addChild(paused);
+		
+			
 			AnswerValue = Fonts.getFont("ScoreValue");
 			answerStringText = new TextField(250, 75, "", AnswerValue.fontName, AnswerValue.fontSize,0xFFFF00);
 			answerStringText.x =400;
@@ -1019,9 +954,7 @@ package screens
 			answerStringText.text = "";
 			
 			// answer label
-			
-			
-			
+			 
 			Time = Fonts.getFont("ScoreValue");
 			TimeText = new TextField(120, 100, "", Time.fontName, 35,0xE8E8E8   );
 			TimeText.x =80;
@@ -1029,14 +962,12 @@ package screens
 			
 			// Time label
 			
-			
-			
-			
+			 
 			Score = Fonts.getFont("ScoreValue");
 			ScoreText = new TextField(120, 100, "", Score.fontName, 35,0xE8E8E8   );
 			ScoreText.x =80;
 			ScoreText.y =470;
-			
+			 
 			
 			// Score label
 			
@@ -1098,18 +1029,15 @@ package screens
 				levelRoomSelect.visible = false;
 				
 				
-				SoundMixer.stopAll();//achievments.visible = true;
+				SoundMixer.stopAll(); 
 				this.addChild(particleSplash); 
 				this.addChild(BackSpace); 
-				//this.addChild(achievments); 
+				 
 				this.addChild(Submit);
 				board.visible = true; 
 				
 				fallSpeed = .3;
-				
-				
-				
-				answerStringText.text = " ";
+			 	answerStringText.text = " ";
 				
 				soundButton = new SoundButton();
 				soundButton.visible = true;soundButton.alpha = .5;
@@ -1125,8 +1053,7 @@ package screens
 				LetterBox.alpha =.7;
 				
 				gameState =1;
-				
-				levelBoolFour = true;	
+				 
 				levelOne.visible = false;
 				levelTwo.visible = false;
 				levelThree.visible = false;
@@ -1134,22 +1061,18 @@ package screens
 				LetterBox.visible = true;
 				LetterBox.alpha =.7;
 				pauseButton.visible = true;
-				////menuButton.visible = true;
-				
+			 	
 				Submit.visible = true; BackSpace.visible = true;this.addChild(board);
 				this.addChild(ScoreText);this.addChild(PointText);this.addChild(TimeText);	this.addChild(answerStringText);	
 				this.addChild(TimeTextAmount);
-				
+				this.addChild(paused);
 				
 			}
 			
 		}		
 		
 		private function addGameElements():void
-		{
-			
-			
-			
+		{ 
 			trace("addElemnts");
 			
 			HundredPoints = new Image(Assests.getAtlas().getTexture("100points") );
@@ -1181,7 +1104,12 @@ package screens
 		 
 			
 			this.addChild(twoHundredPoints );
-		
+			pauseButton = new Button(Assests.getAtlas().getTexture("pauseMenu"));
+			pauseButton.x = 500;
+			pauseButton.y = 680;
+			
+			pauseButton.addEventListener(Event.TRIGGERED, onPauseButtonClick);
+			this.addChild(pauseButton);
 			
 			
 			Submit = new  Button(Assests.getAtlas().getTexture("submit"));
@@ -1197,10 +1125,7 @@ package screens
 			BackSpace.visible = false;
 			BackSpace.addEventListener(Event.TRIGGERED, onBackSpaceButtonClick);
 			
-			greenMushroom = new MovieClip(Assests.getAtlasGreen().getTextures("green"), 20);
-			greenMushroom.x = 700;
-			greenMushroom.y = 550;
-			Starling.juggler.add(greenMushroom);
+		
 			
 		}
 		
@@ -1208,207 +1133,7 @@ package screens
 		{   board.visible = false;
 		 
 		}
-		/*
-		private function onlevelThreeClick(event:Event):void
-		{   	
-		
-			this.addChild(ScoreText);this.addChild(PointText);this.addChild(TimeText);	this.addChild(answerStringText);	this.addChild(board);
-			this.addChild(TimeTextAmount);
-			
-			
-			
-			particleSplash = new PDParticleSystem(XML(new AssestsParticle.ParticleSplashXML),  Texture.fromBitmap(new AssestsParticle.ParticleSplashTexture));	
-			Starling.juggler.add(particleSplash);
-			particleSplash.x=200;
-			particleSplash.y=200;
-			particleSplash.alpha = .75;
-			this.removeEventListener(Event.TRIGGERED,onlevelThreeClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelTwoClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelOneClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelFourClick);
-			addGameElements();
-			levelRoomSelect.visible = false;
-			
-			
-			SoundMixer.stopAll();this.addChild(particleSplash); 
-			//achievments.visible = true;
-			this.addChild(BackSpace); //this.addChild(achievments); 
-			this.addChild(Submit);
-			
-			fallSpeed = .4;
-			soundButton = new SoundButton();
-			soundButton.visible = true;soundButton.alpha = .5;
-			
-			soundButton.addEventListener(Event.TRIGGERED, onSoundButtonClick);
-			this.addChild(soundButton)
-			pauseButton.x = soundButton.x + 70;
-			pauseButton.y = soundButton.y; pauseButton.alpha = .6;
-			
-			////menuButton.x = soundButton.x + 100;
-			////menuButton.y = soundButton.y;
-			
-			if (!Sounds.muted) Sounds. sndLevelSelect.play();
-			
-			//if (!Sounds.muted) Sounds. sndLevelMusic.play(0, 999);
-			answerStringText.text = " ";
-			
-			LetterBox = new Letters();
-			this.addChild(LetterBox);
-			LetterBox.alpha =.7;
-			
-			gameState =1;
-			 
-			levelBoolThree = true;
-			createWords();
-			levelOne.visible = false;
-			levelTwo.visible = false;
-			levelThree.visible = false;
-			levelFour.visible = false;
-			LetterBox.visible = true;
-			pauseButton.visible = true;
-			////menuButton.visible = true;
-			Submit.visible = true; BackSpace.visible = true;
-			 
-			LevelBGThree.visible= true;
-			board.visible = true;
-	 
-		}				
-		
-		private function onlevelTwoClick():void
-		{   
-			
-			
-			this.addChild(ScoreText);this.addChild(PointText);this.addChild(TimeText);	this.addChild(answerStringText);	this.addChild(board);
-			this.addChild(TimeTextAmount);
-			
-			
-			particleSplash = new PDParticleSystem(XML(new AssestsParticle.ParticleSplashXML),  Texture.fromBitmap(new AssestsParticle.ParticleSplashTexture));	
-			Starling.juggler.add(particleSplash);
-			particleSplash.x=200;
-			particleSplash.y=200;
-			particleSplash.alpha = .75;
-			this.removeEventListener(Event.TRIGGERED,onlevelThreeClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelTwoClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelOneClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelFourClick);
-			
-			addGameElements();
-			levelRoomSelect.visible = false;
-			
-			 
-			SoundMixer.stopAll();this.addChild(particleSplash); 
-			//achievments.visible = true;
-			this.addChild(BackSpace); //this.addChild(achievments); 
-			this.addChild(Submit);
-		
-			fallSpeed = .4;
-			soundButton = new SoundButton();
-			soundButton.visible = true;soundButton.alpha = .5;
-			
-			soundButton.addEventListener(Event.TRIGGERED, onSoundButtonClick);
-			this.addChild(soundButton)
-			pauseButton.x = soundButton.x + 70;
-			pauseButton.y = soundButton.y; pauseButton.alpha = .6;
-			
-			////menuButton.x = soundButton.x + 100;
-			////menuButton.y = soundButton.y;
-			
-			if (!Sounds.muted) Sounds. sndLevelSelect.play();
-			
-			//if (!Sounds.muted) Sounds. sndLevelMusic.play(0, 999);
-			answerStringText.text = " ";
-			
-			LetterBox = new Letters();
-			this.addChild(LetterBox);
-			LetterBox.alpha =.7;
-			 
-			gameState =1;
-			 
-			levelBoolTwo = true;
-			createWords();
-			levelOne.visible = false;
-			levelTwo.visible = false;
-			levelThree.visible = false;
-			levelFour.visible = false;
-			LetterBox.visible = true;
-			pauseButton.visible = true;
-			////menuButton.visible = true;
-		    Submit.visible = true; BackSpace.visible = true;
-		 
-			LevelBG.visible= true;
-			board.visible = true;
-	 
-		 
-		}
-		
-		private function onlevelOneClick(event:Event):void
-			
-		{ 	
-			
-			this.addChild(ScoreText);this.addChild(PointText);this.addChild(TimeText);	this.addChild(answerStringText);	this.addChild(board);
-			this.addChild(TimeTextAmount);
-			
-			
-			particleSplash = new PDParticleSystem(XML(new AssestsParticle.ParticleSplashXML),  Texture.fromBitmap(new AssestsParticle.ParticleSplashTexture));	
-			Starling.juggler.add(particleSplash);
-			particleSplash.x=200;
-			particleSplash.y=200;
-			particleSplash.alpha = .75;
-			this.removeEventListener(Event.TRIGGERED,onlevelThreeClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelTwoClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelOneClick);
-			this.removeEventListener(Event.TRIGGERED,onlevelFourClick);
-			 
-			addGameElements();
-		
-			levelRoomSelect.visible = false;
-			
-			SoundMixer.stopAll();this.addChild(particleSplash); 
-			this.addChild(BackSpace);  
-			this.addChild(Submit);
-			 
-			board.visible = true; 
-		 
-			
-			fallSpeed = .4;
-			soundButton = new SoundButton();
-			soundButton.visible = true;soundButton.alpha = .5;
-			
-			soundButton.addEventListener(Event.TRIGGERED, onSoundButtonClick);
-			this.addChild(soundButton)
-			
-			pauseButton.x = soundButton.x + 70;
-			pauseButton.y = soundButton.y; pauseButton.alpha = .6;
-		
-			answerStringText.text = " ";
-			
-			LetterBox = new Letters();
-			this.addChild(LetterBox);
-			LetterBox.alpha =.7;
-			
-			gameState =1;
-			 
-			levelBoolOne = true;
-			createWords();
-			levelOne.visible = false;
-			levelTwo.visible = false;
-			levelThree.visible = false;
-			levelFour.visible = false;
-			LetterBox.visible = true;
-			LetterBox.alpha =.7;
-			pauseButton.visible = true;
-		 
-			Submit.visible = true; BackSpace.visible = true;
-		 
-		}
-		*/
-		private function launchLetter():void
-		{
-			trace("inside of launch letter");
-		
-			
-		}
-		
+  
 		
 		private function onPauseButtonClick(event:Event):void
 		{
@@ -1437,8 +1162,11 @@ package screens
 		private function gameOver():void
 		{	
 			trace("inside of GameOver()");
-		   str4="";
-			this.removeEventListener(Event.TRIGGERED,onlevelFourClick);
+		    str4="";
+			levelOne.removeEventListener(Event.TRIGGERED, onlevelOneClick);
+			levelThree.removeEventListener(Event.TRIGGERED, onlevelThreeClick);
+			levelTwo.removeEventListener(Event.TRIGGERED, onlevelTwoClick);
+			levelFour.removeEventListener(Event.TRIGGERED, onlevelFourClick);
 			this.removeChild(particleSplash); 
 	        this.removeChild(welcomeImage);
 			this.removeChild(loadingImage);
@@ -1461,71 +1189,45 @@ package screens
 			this.removeChild(words10);
 			this.removeChild(words11);
 			this.removeChild(twoHundredPoints);
-			
 			this.removeChild(sevenFiftyPoints);
-			
 			this.removeChild(HundredPoints);
-			
 			this.removeChild(fiveHundredPoints);
-		  
 			this.removeChild(soundButton);
-			
-			//this.removeChild(////menuButton);
-		  
 			this.removeChild(Submit);
 			this.removeChild(BackSpace);
 		    this.removeChild(levelRoomSelect);
-		 
 			this.removeChild(LevelBGThree);
-			
 		    this.removeChild(backMenu)
 			this.removeChild(menuFly);
 			this.removeChild(LevelBGFour);
-			this.removeChild(blueMushroom);
-			this.removeChild(purpleMushroom);
-			this.removeChild(greenMushroom);
-		    this.removeChild(redMushroom);
 			this.removeChild(paused);
 			this.removeChild(achievments);
-			 
 			this.removeChild(levelOne);
-		 
 			this.removeChild(levelTwo);
-			
-		 
 			this.removeChild(levelThree);
-	 
 			this.removeChild(levelFour);
-			
 			this.removeChild(continueButton);
+			this.removeChild(container);
+			this.removeChild(timesUp);
+			words.removeEventListener(Event.TRIGGERED, onWordClick);	
+			words2.removeEventListener(Event.TRIGGERED, onWord2Click);	
+			words3.removeEventListener(Event.TRIGGERED, onWord3Click);
+			BackSpace.removeEventListener(Event.TRIGGERED, onBackSpaceButtonClick);
+			
+			words4.removeEventListener(Event.TRIGGERED, onWord4Click);
+			words5.removeEventListener(Event.TRIGGERED, onWord5Click);
+			words6.removeEventListener(Event.TRIGGERED, onWord6Click);
 			
 			
-			//this.setChildIndex(gameOverContainer, this.numChildren-1);
-			/*gameOverContainer.initialize(points, Math.round(points));
-			tween_gameOverContainer = new Tween(gameOverContainer, 1);
-			tween_gameOverContainer.fadeTo(1);
-			Starling.juggler.add(tween_gameOverContainer);
-			*/
-			this.removeEventListener(Event.TRIGGERED, onWord2Click);	
-			this.removeEventListener(Event.TRIGGERED, onWord3Click);
-			this.removeEventListener(Event.TRIGGERED, onBackSpaceButtonClick);
-			
-			this.removeEventListener(Event.TRIGGERED, onWord4Click);
-			this.removeEventListener(Event.TRIGGERED, onWord5Click);
-			this.removeEventListener(Event.TRIGGERED, onWord6Click);
-			this.removeEventListener(Event.TRIGGERED, onContinueButtonClick);
-			
-			this.removeEventListener(Event.TRIGGERED, onWord7Click);
-			this.removeEventListener(Event.TRIGGERED, onWord8Click);
-			this.removeEventListener(Event.TRIGGERED, onWord9Click);
-			
-			this.removeEventListener(Event.TRIGGERED, onWord10Click);
-			this.removeEventListener(Event.TRIGGERED, onWord11Click);
+			words7.removeEventListener(Event.TRIGGERED, onWord7Click);
+			words8.removeEventListener(Event.TRIGGERED, onWord8Click);
+			words9.removeEventListener(Event.TRIGGERED, onWord9Click);
 			
 			
-			
-			
-			
+			words10.removeEventListener(Event.TRIGGERED, onWord10Click);
+			words11.removeEventListener(Event.TRIGGERED, onWord11Click);
+			menuFly.removeEventListener(Event.ADDED_TO_STAGE,playMenuSound);
+			pauseButton.removeEventListener(Event.TRIGGERED, onPauseButtonClick);
 		}
 		private function onGameTick(event:Event):void
 		{	
@@ -1533,7 +1235,8 @@ package screens
 			switch(gameState)
 			{
 				case 1:
-					
+				
+				
 					ShortTimer();
 					createWords();
 					 ScoreText.text ="SCORE";
@@ -1548,20 +1251,19 @@ package screens
 					words4.addEventListener(Event.TRIGGERED, onWord4Click);
 					words5.addEventListener(Event.TRIGGERED, onWord5Click);
 					words6.addEventListener(Event.TRIGGERED, onWord6Click);
-					
-					
 					words7.addEventListener(Event.TRIGGERED, onWord7Click);
 					words8.addEventListener(Event.TRIGGERED, onWord8Click);
 					words9.addEventListener(Event.TRIGGERED, onWord9Click);
-					
+				
 					PointTime=3;
 					SplashTime=3
+					
 					words10.addEventListener(Event.TRIGGERED, onWord10Click);
 					words11.addEventListener(Event.TRIGGERED, onWord11Click);
 					//start the game
 					gameState = 2;
 				case 2:
-					
+					pauseButton.visible = true;
 					
 					if(SplashTime==-1)	particleSplash.stop(); 
 					if(SplashTime==-1){
@@ -1582,13 +1284,7 @@ package screens
 				
 						
 					}
-					 
-					if(GameTime ==20)
-					{ 
-						
-					
-					 
-					}
+				 
 					if(GameTime ==0){ 
 						pauseButton.visible = false;
 						//LevelBG.visible = false;
@@ -1598,7 +1294,7 @@ package screens
 					
 					break;
 				case 3:
-					
+					onTimesUp(event);
 					gameState = 1;
 					addGameOverElements();
 					board.visible = false;
@@ -1607,13 +1303,7 @@ package screens
 					levelBoolThree = false;
 					levelBoolFour= false;
 					this.removeEventListener(Event.ENTER_FRAME, onGameTick);
-					
-				   gameOver();	
-					showMenu();
-					
-					
-				
-					
+					 
 					break;
 				
 				case 4:
@@ -1623,131 +1313,92 @@ package screens
 			
 		}
 		
-		private function showMenu():void
-		{   trace("inside of showMenu");
-			
-			welcomeImage = new Image(Assests.getAtlas().getTexture("welcome"));
-			this.addChild(welcomeImage);
-			menuFly = new MovieClip(Assests.getAtlasMenu().getTextures("flyMenu_"), 20);
-			menuFly.x = 200;
-			menuFly.y = 80;
-			
-			menuFly.addEventListener(Event.ADDED_TO_STAGE,playMenuSound);
-			menuFly.visible = true;
-			this.addChild(greenMushroom);
-			
-			purpleMushroom = new MovieClip(Assests.getAtlasPurple().getTextures("purple"), 20);
-			purpleMushroom.x = 720;
-			purpleMushroom.y = 140;
-			Starling.juggler.add(purpleMushroom);
-			
-			this.addChild(purpleMushroom);
-			blueMushroom = new MovieClip(Assests.getAtlasBlue().getTextures("blue"), 20);
-			blueMushroom.x = 640;
-			blueMushroom.y = 480;
-			Starling.juggler.add(blueMushroom);
-			this.addChild(blueMushroom);
-			redMushroom = new MovieClip(Assests.getAtlasRed().getTextures("red"), 20);
-			redMushroom.x = -25;
-			redMushroom.y = 100;
-			Starling.juggler.add(redMushroom);
-			this.addChild(redMushroom);
-			
-			
-			backMenu = new Image(Assests.getAtlasMenu().getTexture("menuBack"));
-			backMenu.x = 150;
-			backMenu.visible = true;		this.addChild(backMenu);
+		private function onTimesUp(event:Event):void
+		{ 
+			 
+			timesUp = new Image(Assests.getAtlas().getTexture("timesUp"));
+			timesUp.visible = true;
+			timesUp.x = 300;
+			timesUp.y = 300;
+			this.addChild(timesUp);
+			timesUp.addEventListener(Event.ENTER_FRAME, endOfLevelTimer);
+			 
+		}
 		
-			
-			
-	
-			this.addChild(continueButton);	
-			Starling.juggler.add(menuFly);
-			this.addChild(menuFly);
-			
-			 
-			 
-			//bgQuad.visible= true;
-			continueButton.visible = true;
-			 
+		private function endOfLevelTimer():void
+		{		timesUp.removeEventListener(Event.ENTER_FRAME, endOfLevelTimer);
+			//	HundredPoints.visible = true;
+			// creates a new five-second Timer 
+			EOLTimer = new Timer(1000, 2);
+			// designates listeners for the interval and completion events 
+			EOLTimer.addEventListener(TimerEvent.TIMER, onTickEOL); 
+			//minuteTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete); 
+			// starts the timer ticking 
+			EOLTimer.start(); 
+			//trace(PointTime);
+			} 
 			
 		 
 		
+		private function onTickEOL(event:TimerEvent):void  
+		{  
+			EOLTime = -2+ event.target.currentCount;
+			 trace(EOLTime);
+			 trace("EOL PointTimer");
+				if(EOLTime ==0) {
+					EOLTimer.removeEventListener(TimerEvent.TIMER, onTickEOL);
+					showMenu();
+					
+				}
+			
+		}
 		
-			this.removeEventListener(Event.ENTER_FRAME, onGameTick);
-			showMenuBool = true;
-		
-			continueButton.visible = true;
 			
-	
-			
-			
-			
-		
-	//showMushrooms();
-
-			
-		}		
+		 
 		
 		private function showMushrooms():void
 		{
-			
-			this.addChild(greenMushroom);
-		
-			purpleMushroom = new MovieClip(Assests.getAtlasPurple().getTextures("purple"), 20);
-			purpleMushroom.x = 720;
-			purpleMushroom.y = 140;
-			Starling.juggler.add(purpleMushroom);
-			
-			this.addChild(purpleMushroom);
-			blueMushroom = new MovieClip(Assests.getAtlasBlue().getTextures("blue"), 20);
-			blueMushroom.x = 640;
-			blueMushroom.y = 480;
-			Starling.juggler.add(blueMushroom);
-			this.addChild(blueMushroom);
-			redMushroom = new MovieClip(Assests.getAtlasRed().getTextures("red"), 20);
-			redMushroom.x = -25;
-			redMushroom.y = 100;
-			Starling.juggler.add(redMushroom);
-			this.addChild(redMushroom);
-		 
-			
-	
-			
+		    currentMovieClip:Sprite;
+		    container = SpritePool.retrieveF();
+			 
+			this.addChild(container);
+			menuFly.removeEventListener(Event.ENTER_FRAME, showMushrooms);
 		}
+		
+		private function showMenu():void
+		{ 
+			timesUp.removeEventListener(Event.ENTER_FRAME, showMenu);
+			trace("inside of showMenu");
+			welcomeImage = new Image(Assests.getAtlas().getTexture("welcome"));
+			this.addChild(welcomeImage);
+		
+			backMenu = new Image(Assests.getAtlasMenu().getTexture("menuBack"));
+			backMenu.x = 170;
+			backMenu.visible = true;	this.addChild(backMenu);
+		
+			menuFly = new MovieClip(Assests.getAtlasMenu().getTextures("flyMenu_"), 20);
+			menuFly.x = 200;
+			menuFly.y = 80;
+			menuFly.visible = true;
+			Starling.juggler.add(menuFly);	this.addChild(menuFly);
+			if (!Sounds.muted) Sounds.sndWinGame.play(); 
+			menuFly.addEventListener(Event.ENTER_FRAME, showMushrooms);
+			 
+			this.addChild(continueButton);	
+			continueButton.visible = true;
+			this.removeEventListener(Event.ENTER_FRAME, onGameTick);
+			showMenuBool = true;
+			continueButton.visible = true;
+			 
+		}		
+	
 		
 		private function playMenuSound():void
 		{
-			if (!Sounds.muted) Sounds.sndWinGame.play(); 
+			
 			
 		}
 	
-		 
-		private function drawGameOverScreen():void
-		{
-		/*	gameEnd = true;
-			gameOverContainer = new GameOverContainer(gameEnd);
-			gameOverContainer.addEventListener(NavigationEvent.CHANGE_SCREEN, playAgain);
-			this.addChild(gameOverContainer);
-			*/
-			
-		}
-		
-		
-		private function playAgain(event:NavigationEvent):void
-		{
-			
-			if (event.params.id == "playAgain") 
-			{
-			/*	tween_gameOverContainer = new Tween(gameOverContainer, 1);
-				tween_gameOverContainer.fadeTo(0);
-				tween_gameOverContainer.onComplete = gameOverFadedOut;
-				Starling.juggler.add(tween_gameOverContainer);*/
-			/*	initialize();
-				drawGame();
-				 */
-			}
-		}
 		
 		private function onInGameNavigation(event:NavigationEvent):void
 		{
@@ -1804,7 +1455,7 @@ package screens
 		private function ShortTimer() :void 
 		{ trace("shortTimer");
 		
-			minuteTimer = new Timer(1000, 25); 
+			minuteTimer = new Timer(1000, 4); 
 			minuteTimer.addEventListener(TimerEvent.TIMER, onTick); 
 			minuteTimer.start(); 
 			
