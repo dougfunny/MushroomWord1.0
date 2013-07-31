@@ -31,7 +31,7 @@ package
 		public static const SND_LevelOneMusic_Letter:Class;
 		
 		
-		[Embed(source="../media/assets/music/MainTheme.mp3")]
+		[Embed(source="../media/assets/music/welcomeSounds.mp3")]
 		public static const SND_MainTheme_Letter:Class;
 		
 		[Embed(source="../media/assets/music/achievementTwo.mp3")]

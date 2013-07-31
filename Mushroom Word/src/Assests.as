@@ -13,6 +13,9 @@ package
 		
 		[Embed(source="/../media/assets/loading.png")]
 		public static const Background:Class;
+		 
+		[Embed(source="/../media/assets/SplashScreen.png")]
+		public static const BackgroundLogo:Class;
 		
 		[Embed(source="/../media/assets/SplashScreen.png")]
 		public static const SplashLoading:Class;

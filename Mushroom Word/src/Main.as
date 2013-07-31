@@ -30,7 +30,7 @@ package
 	 */	
 	
 	
-   [SWF(frameRate="60", width="960", height="640",BackgroundColor="0x000000")]
+   [SWF(frameRate="60", width="960", height="640",BackgroundColor="0xFFFFFF")]
 	//[SWF(frameRate="60", width="1024", height="768",BackgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
@@ -42,17 +42,22 @@ package
 		private var PointTime:int;
 		private var sprite:MovieClip = new MovieClip();
 		private var Background:Bitmap =  new Assests.Background();
-	 
-		
-		private var bgSplash:Bitmap =  new Assests.Background();
+	  
+		private var minuteTimer:Timer;
+		private var RoundTime:int = 5;
+		private var GameTime:int;
+		private var BackGroundTwo:Bitmap =   new Assests.Background();
  
 		
 		public function Main( )
 			 
-		{  
+		{    ShortTimer();
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			
+		}
+		
+		private function ShortTimer() :void 
+		{ 
 			//if (!Sounds.muted) Sounds.sndLoadingGame.play();
 			// set general properties
 			
@@ -79,12 +84,13 @@ package
 			//  be copied into the package any longer once they are embedded.) 
 			
 			var startupImage:MovieClip = createStartupImage(viewPort, screenWidth > 320);
+			
 			addChild(startupImage);
 			
 			
 			
 			myStarling = new Starling(Game, stage, null, null, "auto", "baseline");
-			myStarling.antiAliasing = 10;
+			myStarling.antiAliasing = 2;
 			
 			
 			myStarling.stage3D.addEventListener(Event.CONTEXT3D_CREATE, function(e:Event):void 
@@ -102,12 +108,10 @@ package
 			
 			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, 
 				function (e:Event):void { myStarling.stop(); });
-		}
-		
-	 
-		
+		} 
+ 
 		private function createStartupImage(viewPort:Rectangle, isHD:Boolean):MovieClip
-		{
+		{    
 			var sprite:MovieClip = new MovieClip();
 			
 			var Background:Bitmap = isHD ?
@@ -123,10 +127,6 @@ package
 			return sprite;
 		}
 		
-		
-		
-		
-		
-		
+		 
 	}
 }

@@ -12,8 +12,23 @@ package screens
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
 	import starling.events.Event;
- 
+    import flash.net.navigateToURL;
     import objects.Mushroom;
+	import objects.GameFont;
+	
+	import flash.media.SoundMixer;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
+	 
+	import starling.display.Button;
+	import starling.display.Image;
+	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.text.TextField;
+	import starling.utils.HAlign;
+	import starling.utils.VAlign;
+
+    import flash.net.URLRequest;
 	
 	public class Welcome extends Sprite
 	{
@@ -28,12 +43,18 @@ package screens
 		private var blueMushroom:MovieClip;
 		public var loadMushrooms:Mushroom;
 		private var loadingImage:Image;
+		private var fbFindUs:Button;
+		private var aboutBtn:Button;
+ 
+		private var fontRegular:GameFont;
+		private var aboutText:TextField;
+		private var screenMode:String;
+		private var aboutBtnBlue:Image;
+		private var aboutBox:Image;
 		
 		
 		public function Welcome()
 		{
-		
-			
 			super();
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			//
@@ -41,7 +62,7 @@ package screens
 		
 		private function onAddedToStage(event:Event):void
 		{	
-			
+			if (!Sounds.muted) Sounds. sndLevelMainTheme.play();
 			drawScreen();
 			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			
@@ -59,24 +80,77 @@ package screens
 			startButton = new Button(Assests.getAtlas().getTexture("startButton"));
 			this.addChild(startButton);
 			
+			fbFindUs = new Button(Assests.getAtlas().getTexture("fundUsFB"));
+			fbFindUs.x = 720;
+			fbFindUs.y = 395;
+			this.addChild(fbFindUs);
 			
+			fbFindUs.addEventListener(Event.TRIGGERED, fbFindUsClick);
+			  
 			blueButton.x = 250;
 			blueButton.y = 350;
 			startButton.x = 257;
 			startButton.y = 360;
 			
+			startButton.addEventListener(Event.TRIGGERED , onMenuClick);
 			
-			this.addEventListener(Event.TRIGGERED , onMenuClick);
+			aboutBtnBlue = new Image(Assests.getAtlas().getTexture("aboutButtonBlue"));
+			aboutBtnBlue.x = 620;
+			aboutBtnBlue.y = 290;
+			this.addChild(aboutBtnBlue);
 			
+			aboutBtn = new Button(Assests.getAtlas().getTexture("aboutButton"));
+			aboutBtn.x = 628;
+			aboutBtn.y = 293;
+			aboutBtn.addEventListener(Event.TRIGGERED, onAboutClick);
+			this.addChild(aboutBtn);
+			
+			// ABOUT ELEMENTS
+			fontRegular  = Fonts.getFont("ScoreValue");
+			
+			aboutBox = new Image(Assests.getAtlas().getTexture("aboutBox"));
+			aboutBox.x = 460;
+			aboutBox.y = 480;
+			aboutBox.visible = false;
+			this.addChild(aboutBox);
+			
+			aboutText = new TextField(480, 600, "", fontRegular.fontName, 30, 0xffffff);
+			aboutText.text = "HELP THE MUSHROOMS TO LIVE BY SPELLING WORDS CORRECTLY"
+			aboutText.x = 460;
+			aboutText.y = 480;
+			 
+			aboutText.visible = false
+			aboutText.height = aboutText.textBounds.height + 30;
+			this.addChild(aboutText);
+			 
+			
+		}	
+		
+		
+		private function onAboutClick(event:Event):void
+		{
+			if (!Sounds.muted) Sounds.sndLevelSelect.play();
+			showAbout();
 		}
 		
-	 
+		public function showAbout():void
+		{
+			 
+		 if(aboutText.visible==false ){
+			aboutText.visible = true;aboutBox.visible = true;}
+		 else {aboutText.visible = false;aboutBox.visible=false;}
+		 
+		}
+
+		private function fbFindUsClick(event:Event):void
+		{
+			navigateToURL(new URLRequest("http://www.Facebook.com/"), "_blank");
+		}
+
 		
 		private function onMenuClick(event:Event):void
 		{
 			 
-			
-			
 			loadingImage = new Image(Assests.getAtlas().getTexture("loading"));
 			loadingImage.visible = true;
 			loadingImage.x = 300;
@@ -84,7 +158,6 @@ package screens
 			loadingImage.addEventListener(Event.ENTER_FRAME,MushroomLoader);
 			
 			this.addChild(loadingImage);
-			
 			
 		}
 		
@@ -94,21 +167,13 @@ package screens
 			var  buttonClicked:Button  = event.target as Button;
 			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id:"logo"} ,true))
 			loadingImage.removeEventListener(Event.ENTER_FRAME,MushroomLoader);
-			 
-			
-			   loadMushrooms = new Mushroom();
-				this.addChild(loadMushrooms);
-				
-			
-				
-			 
+			  
 			
 		}
 		
 		public function intialize():void
 		{
 			this.visible = true;
-			
 			
 		}
 		
@@ -118,7 +183,7 @@ package screens
 			this.visible = false;
 			
 		}
+		
 	}
-	
 	
 }
